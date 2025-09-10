@@ -11,8 +11,8 @@ const app = express();
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('Conectado a MongoDB'))
-  .catch(err => console.error('Error de conexión:', err));
+    .then(() => console.log('Conectado a MongoDB'))
+    .catch(err => console.error('Error de conexión:', err));
 
 const compraRepository = new CompraRepository(CompraModel);
 const compraUseCase = new CompraUseCase(compraRepository);
