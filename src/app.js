@@ -11,6 +11,12 @@ const UsuarioRepository = require('./repositories/UsuarioRepository');
 const UsuarioUseCase = require('./usecases/UsuarioUseCase');
 const UsuarioController = require('./controllers/UsuarioController');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+// Clientes
+const ClienteModel = require('./infrastructure/ClienteModel');
+const ClienteRepository = require('./repositories/ClienteRepository');
+const ClienteUseCase = require('./usecases/ClienteUseCase');
+const ClienteController = require('./controllers/ClienteController');
+const clienteRoutes = require('./routes/clienteRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -28,7 +34,12 @@ const usuarioRepository = new UsuarioRepository(UsuarioModel);
 const usuarioUseCase = new UsuarioUseCase(usuarioRepository);
 const usuarioController = new UsuarioController(usuarioUseCase);
 
+const clienteRepository = new ClienteRepository(ClienteModel);
+const clienteUseCase = new ClienteUseCase(clienteRepository);
+const clienteController = new ClienteController(clienteUseCase);
+
 app.use('/compras', compraRoutes(compraController));
 app.use('/usuarios', usuarioRoutes(usuarioController));
+app.use('/clientes', clienteRoutes(clienteController));
 
 module.exports = app;
