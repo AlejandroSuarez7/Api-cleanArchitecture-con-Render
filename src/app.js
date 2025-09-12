@@ -5,6 +5,12 @@ const CompraRepository = require('./repositories/CompraRepository');
 const CompraUseCase = require('./usecases/CompraUseCase');
 const CompraController = require('./controllers/CompraController');
 const compraRoutes = require('./routes/compraRoutes');
+// Usuarios
+const UsuarioModel = require('./infrastructure/UsuarioModel');
+const UsuarioRepository = require('./repositories/UsuarioRepository');
+const UsuarioUseCase = require('./usecases/UsuarioUseCase');
+const UsuarioController = require('./controllers/UsuarioController');
+const usuarioRoutes = require('./routes/usuarioRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -18,6 +24,11 @@ const compraRepository = new CompraRepository(CompraModel);
 const compraUseCase = new CompraUseCase(compraRepository);
 const compraController = new CompraController(compraUseCase);
 
+const usuarioRepository = new UsuarioRepository(UsuarioModel);
+const usuarioUseCase = new UsuarioUseCase(usuarioRepository);
+const usuarioController = new UsuarioController(usuarioUseCase);
+
 app.use('/compras', compraRoutes(compraController));
+app.use('/usuarios', usuarioRoutes(usuarioController));
 
 module.exports = app;
